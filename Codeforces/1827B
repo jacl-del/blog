@@ -1,0 +1,23 @@
+#include<iostream> 
+using namespace std;
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        string s;
+        cin >> n >> s;
+        int ans = 0, res = 2;
+        for (int i = 1; i < n; i++) {
+            if (s[i] == s[i - 1]) res++;
+            else {
+                ans = max(ans, res);
+                res = 2;
+            }
+        }
+        ans = max(ans, res);
+        cout << ans << endl;
+    }
+    return 0;
+}
