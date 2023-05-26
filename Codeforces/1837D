@@ -1,0 +1,52 @@
+#include<iostream> 
+using namespace std;
+int a[1000010];
+int main()
+{
+    int t;
+    cin >> t;
+    while (t--) {
+        int n;
+        string s;
+        cin >> n >> s;
+        int l = 0, r = 0;
+        bool s1 = true, s2 = true;
+        int res = 0;
+        if (s[0] != '(' || s[n - 1] != ')') s1 = false;
+        if (s[0] == s[n - 1]) s2 = false;
+        int ans = 1;
+        char u = s[0];
+        for (int i = 0; i < n; i++) {
+            if (s[i] == '(') l++;
+            else r++;
+            if (u == '(') {
+                if (l < r) ans=3-ans, u = s[i];
+                a[i] = ans;
+            }
+            else {
+                if (l > r) ans=3-ans, u = s[i];
+                a[i] = ans;
+            }
+            if (s1) {
+                if (l < r) s2 = false;
+            }
+            else {
+                if (l > r) s2 = false;
+            }
+
+        }
+        if (l != r) cout << "-1" << endl;
+        else {
+            if (s2) {
+                cout << 1 << endl;
+                for (int i = 0; i < n; i++) cout << 1 << " ";
+            }
+            else {
+                cout << 2 << endl;
+                for (int i = 0; i < n; i++) cout << a[i] << " ";
+            }
+            cout << endl;
+        }
+    }
+    return 0;
+}
