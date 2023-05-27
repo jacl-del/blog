@@ -1,0 +1,29 @@
+#include<iostream>
+using namespace std;
+const int N=100010;
+int a[N];
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        for(int i=0;i<n;i++) cin>>a[i];
+        sort(a,a+n);
+        bool z=true;
+        long long sum=a[0];
+        if(sum>1) z=false;
+        else{
+            for(int i=1;i<n;i++){
+                if(sum<a[i]){
+                    z=false;
+                    break;
+                }
+                sum+=a[i];
+            }
+        }
+        if(z) cout<<"YES"<<endl;
+        else cout<<"NO"<<endl;
+    }
+}
