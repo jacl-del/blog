@@ -1,0 +1,39 @@
+/**
+ *    author:  jacl
+ *    created: 31.05.2023      
+**/
+#include<iostream>
+using namespace std;
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--) {
+		long long n;
+		cin >> n;
+		if (n < 7) cout << -1 << endl;
+		else {
+			long long r[3] = { 0 };
+			int u = 0;
+			int c[3] = { 0 };
+			for (int i = 62; i >= 0; i--) {
+				if (u < 3 && (n >> i) & 1) {
+					r[u] = 1ll << i;
+					c[u++] = i;
+				}
+			}
+			long long ans = 0;
+			if (u == 3) ans += r[0] + r[1] + r[2];
+			else if (u == 2 && c[1] >= 2) {
+				ans += r[0];
+				ans += 1ll << (c[1] - 1);
+				ans += 1ll << (c[1] - 2);
+			}
+			else {
+				ans = (1ll << (c[0] - 1)) + (1ll << (c[0] - 2)) + (1ll << (c[0] - 3));
+			}
+			cout << ans << endl;
+		}
+	}
+	return 0;
+}
