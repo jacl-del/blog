@@ -1,0 +1,46 @@
+/**
+ *    author:  jacl
+ *    created: 2.6.2023
+**/
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--) {
+		bool ans = true;
+		vector<int>a(26, 0);
+		vector<int>b(26, 0);
+		int n, k;
+		cin >> n >> k;
+		string c, d;
+		cin >> c >> d;
+		for (int i = 0; i < n; i++) {
+			a[c[i] - 'a']++;
+			b[d[i] - 'a']++;
+		}
+		for (int i = 0; i < 26; i++) {
+			if (a[i] != b[i]) ans = false;
+		}
+		if (c == d || (n >= 2 * k && ans)) cout << "YES" << endl;
+		else {
+			if (!ans || k >= n) cout << "NO" << endl;
+			else {
+				int u = 2 * k - n;
+				bool q = true;
+				for (int i = 0; i < u; i++) {
+					if (c[k - i - 1] != d[k - i - 1]) {
+						q = false;
+						break;
+					}
+				}
+				if (q) cout << "YES" << endl;
+				else cout << "NO" << endl;
+			}
+		}
+	}
+	return 0;
+}
