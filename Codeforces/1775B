@@ -1,0 +1,35 @@
+/**
+ *    author:  jacl
+ *    created: 2.6.2023
+**/
+#include <iostream>
+#include<vector>
+#include<map>
+using namespace std;
+typedef long long ll;
+int main() {
+    int t; scanf("%d", &t);
+    while (t--) {
+        int n, ans = 0; scanf("%d", &n);
+        vector<vector<int>>num(n + 1);
+        map<int, int>used;
+        for (int i = 1; i <= n; i++) {
+            int m; scanf("%d", &m);
+            for (int k = 1; k <= m; k++) {
+                int x; scanf("%d", &x);
+                num[i].push_back(x); used[x]++;
+            }
+        }
+        for (int i = 1; i <= n; i++) {
+            ans = 1;
+            for (auto k : num[i]) {
+                if (used[k] == 1) {
+                    ans = 0;
+                }
+            }
+            if (ans)break;
+        }
+        puts(ans ? "YES" : "NO");
+    }
+    return 0;
+}
