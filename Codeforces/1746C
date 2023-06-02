@@ -1,0 +1,65 @@
+//@other Acceted:
+#include<iostream>
+using namespace std;
+int a[200010], b[200010];
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--) {
+		int n;
+		cin >> n;
+		for (int i = 1; i <= n; i++) {
+			cin >> a[i];
+			b[a[i]] = i + 1;
+		}
+		for (int i = 1; i <= n; i++) cout << min(b[i], n) << " ";
+		cout << endl;
+	}
+	return 0;
+}
+
+//@ My Acceted:
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+const int N = 200010;
+int a[N];
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--) {
+		int n;
+		cin >> n;
+		vector<int>ans(n + 1, 1);
+		vector<int>st(n + 1, false);
+		vector<pair<int, int>>q;
+		int u = 1;
+		for (int i = 1; i <= n; i++) {
+			cin >> a[i];
+			if (i > 1) {
+				int d = a[i - 1] - a[i];
+				if (d > 0) {
+					q.push_back({ d,i });
+				}
+			}
+		}
+		sort(q.begin(), q.end());
+		for (int i = 0; i < q.size(); i++) {
+			for (u; u <= n; u++) {
+				if (u >= q[i].first) {
+					ans[u] = q[i].second;
+					u++;
+					break;
+				}
+			}
+		}
+		for (int i = 1; i <= n; i++) {
+			cout << ans[i] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
