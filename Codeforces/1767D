@@ -1,0 +1,23 @@
+/*
+    字符串s中'0', '1'出现无关.
+    '1'有l个, '0'有r个, 则x的可能性为 pow(2, l) ~ pow(2, r) - pow(2, r) + 1.
+*/
+#include<iostream>
+using namespace std;
+int main()
+{
+	int n;
+	cin >> n;
+	string s;
+	cin >> s;
+	int l = 0, r = 0;
+	for (int i = 0; i < n; i++) {
+		if (s[i] - '0' == 1) l++;
+		else r++;
+	}
+	for (int i = pow(2, l); i <= pow(2, n) - pow(2, r) + 1; i++) {
+		cout << i << " ";
+	}
+	cout << endl;
+	return 0;
+}
