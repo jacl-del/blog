@@ -1,0 +1,27 @@
+#include<iostream>
+#include<vector>
+using namespace std;
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--) {
+		int n;
+		cin >> n;
+		vector<string>s(n);
+		for (int i = 0; i < n; i++) cin >> s[i];
+		for (int i = 0; i < n; i++) {
+			vector<int>ans;
+			for (int j = 0; j < n; j++) {
+				if (s[j][i] == '1') {
+					ans.push_back(1 + j);
+				}//第j行属于第i行,i行中应有j元素
+			}
+			ans.push_back(1 + i);//每一行都有自己特殊的元素
+			cout << ans.size() << " ";
+			for (int i = 0; i < ans.size(); i++) cout << ans[i] << " ";
+			cout << endl;
+		}
+	}
+	return 0;
+}
