@@ -1,0 +1,36 @@
+/**
+ *    author:  jacl
+ *    created: 2.6.2023
+**/
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--) {
+		int n, k;
+		cin >> n >> k;
+		vector<bool>st(n + 1, false);
+		for (int i = n; i >= 1; i--) {
+			if (k >= i) st[i] = true, k -= i;
+		}
+		vector<int>ans(n + 1,0);
+		int l = 0, r = 0;
+		for (int i = 1; i <= n; i++) {
+			if (st[i]) {
+				ans[i] = -r + 1;
+				l += ans[i];
+			}
+			else {
+				ans[i] = -l - 1;
+				r += ans[i];
+			}
+		}
+		for (int i = n; i >= 1; i--) cout << ans[i] << " ";
+		cout << endl;
+	}
+	return 0;
+}
