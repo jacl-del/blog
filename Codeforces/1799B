@@ -1,0 +1,48 @@
+/**
+ *    author:  jacl
+ *    created: 2.6.2023
+**/
+#include<iostream>
+#include<vector>
+#include<algorithm>
+using namespace std;
+const int N = 200;
+int a[N];
+int main()
+{
+	int t;
+	cin >> t;
+	while (t--) {
+		int n;
+		cin >> n;
+		bool u = false, k = false;
+		for (int i = 1; i <= n; i++) {
+			cin >> a[i];
+			if (a[i] == 1) u = true;
+			if (i > 1 && a[i] != a[i - 1]) k = true;
+		}
+		if (!k) cout << 0 << endl;
+		else if (u) cout << -1 << endl;
+		else {
+			vector<pair<int, int>>q;
+			int l = 1, r = 1;
+			int ans = 0;
+			int y = 0;
+			while (true) {
+				l = 1, r = 1;
+				for (int i = 1; i <= n; i++) {
+					if (a[i] > a[l]) l = i;
+					if (a[i] < a[r]) r = i;
+				}
+				if (l == r) break;
+				q.push_back({ l,r });
+				a[l] = (a[l] + a[r] - 1) / a[r];
+			}
+			cout << q.size() << endl;
+			for (int i = 0; i < q.size(); i++) {
+				cout << q[i].first << " " << q[i].second << endl;
+			}
+		}
+	}
+	return 0;
+}
