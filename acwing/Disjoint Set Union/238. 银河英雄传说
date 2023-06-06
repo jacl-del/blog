@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+const int N=30010;
+int p[N],sz[N],d[N];
+int find(int x)
+{
+    if(p[x]!=x){
+        int root=find(p[x]);
+        d[x]+=d[p[x]];//一个简单的递归
+        p[x]=root;
+    }
+    return p[x];
+}
+int main()
+{
+    int T;
+    cin>>T;
+    for(int i=1;i<N;i++) p[i]=i,sz[i]=1;
+    while(T--){
+        char c;
+        int a,b;
+        cin>>c>>a>>b;
+        int pa=find(a),pb=find(b);
+        if(c=='M'){
+            if(pa!=pb){
+                d[pa]=sz[pb];
+                sz[pb]+=sz[pa];
+                p[pa]=pb;
+            }
+        }else{
+            if(pa!=pb) cout<<-1<<endl;
+            else{
+                cout<<max(abs(d[a]-d[b])-1,0)<<endl;
+            }
+        }
+    }
+    return 0;
+}
