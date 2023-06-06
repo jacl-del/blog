@@ -1,0 +1,38 @@
+#include<iostream>
+using namespace std;
+const int N=100010;
+int p[N],v[N],w[N];
+int f[N];
+int find(int x)
+{
+    if(p[x]!=x) p[x]=find(p[x]);
+    return p[x];
+}
+int main()
+{
+    int n,m,W;
+    cin>>n>>m>>W;
+    for(int i=1;i<=n;i++){
+        p[i]=i;
+        cin>>v[i]>>w[i];
+    }
+    while(m--){
+        int a,b;
+        cin>>a>>b;
+        int pa=find(a),pb=find(b);
+        if(pa!=pb){
+            v[pb]+=v[pa];
+            w[pb]+=w[pa];
+            p[pa]=pb;
+        }
+    }
+    for(int i=1;i<=n;i++){
+        if(p[i]==i){
+            for(int j=W;j>=v[i];j--){
+                f[j]=max(f[j],f[j-v[i]]+w[i]);
+            }
+        }
+    }
+    cout<<f[W];
+    return 0;
+}
